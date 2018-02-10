@@ -1,28 +1,19 @@
 # Created by .ignore support plugin (hsz.mobi)
-### Windows template
-# Windows thumbnail cache files
-Thumbs.db
-ehthumbs.db
-ehthumbs_vista.db
+### Linux template
+*~
 
-# Dump file
-*.stackdump
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
 
-# Folder config file
-[Dd]esktop.ini
+# KDE directory preferences
+.directory
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-### Java template
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+### Kotlin template
 # Compiled class file
 *.class
 
@@ -45,18 +36,6 @@ $RECYCLE.BIN/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-### Kotlin template
-# Compiled class file
-
-# Log file
-
-# BlueJ files
-
-# Mobile Tools for Java (J2ME)
-
-# Package Files #
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 ### macOS template
 # General
 .DS_Store
@@ -84,3 +63,18 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+### Java template
+# Compiled class file
+
+# Log file
+
+# BlueJ files
+
+# Mobile Tools for Java (J2ME)
+
+# Package Files #
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+.idea/inspectionProfiles/
+.idea/vcs.xml
+.idea/workspace.xml
