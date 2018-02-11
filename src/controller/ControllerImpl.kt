@@ -1,4 +1,4 @@
-package Controller
+package controller
 
 class ControllerImpl(val view: BattleshipView):Controller{
     init {
