@@ -1,10 +1,12 @@
 package controller
 
-class ControllerImpl(val view: BattleshipView):Controller{
+import view.BattleshipView
+
+class ControllerImpl(private val view: BattleshipView) : Controller {
     init {
         view.setController(this)
-
     }
+
     override fun hitCoordinate(coordinates: String) {
 
     }
