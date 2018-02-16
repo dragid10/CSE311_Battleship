@@ -1,7 +1,5 @@
 package view;
 
-import controller.ControllerImpl;
-
 public interface TicTacToeView {
 
     /**
@@ -26,6 +24,4 @@ public interface TicTacToeView {
      * @param A ship
      */
     //public void displaySunkenShip(Ship ship);
-
-    void setController(ControllerImpl controller);
 }

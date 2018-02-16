@@ -1,16 +1,16 @@
 package model
 
-import java.util.Scanner
+import java.util.*
 
 class Player {
 
-    constructor(){}
+    constructor()
 
     fun makeMove() {
         with(Scanner(System.`in`)) {
             val x = nextInt()
             val y = nextInt()
-            val playerMove = Coordinates(x,y)
+            val playerMove = Coordinates(x, y)
         }
     }
 

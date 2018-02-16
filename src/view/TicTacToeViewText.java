@@ -1,7 +1,5 @@
 package view;
 
-import controller.ControllerImpl;
-
 import java.util.Scanner;
 
 public class TicTacToeViewText implements TicTacToeView {
@@ -51,10 +49,6 @@ public class TicTacToeViewText implements TicTacToeView {
         breakln();
     }
 
-    @Override
-    public void setController(ControllerImpl controller) {
-
-    }
 
     @Override
     public void updateBoardAsHit(int x, int y) {

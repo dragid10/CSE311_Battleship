@@ -1,34 +1,29 @@
 package model
 
-class Grid{
+class Grid(val gridCoords: HashMap<Coordinates, Int>) {
+//    val gridSize = 3
 
-    var gridCoords: HashMap<Coordinates, Int>
-
-    val gridSize = 3;
-
-    constructor() {
-        gridCoords = initGrid()
+    init {
+        initGrid(gridCoords)
     }
 
-    fun getCellStatus(coords: Coordinates): Int? {
-        return gridCoords.get(coords);
+    private fun getCellStatus(coords: Coordinates): Int? {
+        return gridCoords[coords]
     }
 
-    fun setCellStatus(coords: Coordinates, player: Int): {
-        if(getCellStatus(coords) == 0) {
-            gridCoords.set(coords, player)
+    private fun setCellStatus(coords: Coordinates, player: Int) {
+        if (getCellStatus(coords) == 0) {
+            gridCoords[coords] = player
         }
     }
 
-    fun initGrid(): HashMap<Coordinates, Int> {
-        for(i in 1..3) {
-            for(j in i..3) {
-                var coords : Coordinates = Coordinates(i,j)
-                gridCoords.put(coords, 0)
+    private fun initGrid(gridCoords: HashMap<Coordinates, Int>) {
+        for (i in 1..3) {
+            for (j in i..3) {
+                var coords = Coordinates(i, j)
+                gridCoords[coords] = 0
             }
         }
     }
-
-
 }
 
