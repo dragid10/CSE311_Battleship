@@ -9,14 +9,14 @@ public interface BattleshipView {
 	 * @param y
 	 */
 	public void updateBoardAsHit(int x, int y);
-	
+
 	/**
 	 * Display miss fire in water
 	 * @param x
 	 * @param y
 	 */
 	public void updateBoardAsMiss(int x, int y);
-	
+
 	/**
 	 * Display a sunken ship
 	 * @param ship
@@ -37,8 +37,8 @@ public interface BattleshipView {
 		    options,
 		    options[0]);
 
-		
-		
+
+
 		/*Object[] possibleValues = { "First", "Second", "Third" };
 		Object selectedValue = JOptionPane.showInputDialog(null,
 		"Choose one", "Input",
@@ -51,9 +51,9 @@ public interface BattleshipView {
 			    null,
 			    options,
 			    options[0]);
-		
+
 	     Object selectedValue = pane.getValue();*/
-		
+
 		if(n == 0) {
 			BattleshipViewGUI gui = new BattleshipViewGUI();
 			gui.setTitle("Battleship");
@@ -69,8 +69,8 @@ public interface BattleshipView {
 		}else {
 			System.out.println("You chose the text view");
 			BattleshipViewText text = new BattleshipViewText(10,10);
-			
+
 		}
-		
+
 	}
 }
