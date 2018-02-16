@@ -2,27 +2,31 @@ package model
 
 class Grid{
 
-    var gridCoords: HashMap<Coordinates, String>
+    var gridCoords: HashMap<Coordinates, Int>
     var gridOwner: Player
 
-    val gridSize = 10;
+    val gridSize = 3;
 
     constructor(gridOwner: Player) {
-        gridCoords = HashMap<Coordinates, String>()
+        gridCoords = HashMap<Coordinates, Int>()
         this.gridOwner = gridOwner
     }
 
-        fun attack(coords: Coordinates) {
-            if(gridCoords.containsKey(coords)) {
-                if(gridCoords.get(coords) == "Not guessed") {
-
-                }
-            }
-
-        }
-
-    fun getCellStatus(coords: Coordinates): String? {
+    fun getCellStatus(coords: Coordinates): Int? {
         return gridCoords.get(coords);
+    }
+
+    fun setCellStatus(coords: Coordinates): {
+        if(getCellStatus(coords) == 0)
+    }
+
+    fun initGrid(): HashMap<Coordinates, Int> {
+        for(i in 1..3) {
+            for(j in i..3) {
+                var coords : Coordinates = Coordinates(i,j)
+                gridCoords.put(coords, 0)
+            }
+        }
     }
 
 
