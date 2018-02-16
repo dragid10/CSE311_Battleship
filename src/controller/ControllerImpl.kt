@@ -1,8 +1,8 @@
 package controller
 
-import view.BattleshipView
+import view.TicTacToeView
 
-class ControllerImpl(private val view: BattleshipView) : Controller {
+class ControllerImpl(private val view: TicTacToeView) : Controller {
     //    Member Variables
     lateinit var player1: Player
     lateinit var player2: Player
@@ -13,7 +13,12 @@ class ControllerImpl(private val view: BattleshipView) : Controller {
     }
 
     //    Overridden Functions
-    override fun hitCoordinate(coordinates: String) {
+
+    override fun startGame() {
+
+    }
+
+    override fun takeSpot(coordinate: String) {
 
     }
 
