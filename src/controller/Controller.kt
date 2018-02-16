@@ -1,5 +1,6 @@
 package controller
 
 interface Controller {
-    fun hitCoordinate(coordinates: String)
+    fun takeSpot(coordinate: String)
+    fun startGame()
 }
