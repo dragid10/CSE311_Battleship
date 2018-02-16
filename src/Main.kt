@@ -1,4 +1,5 @@
 import controller.ControllerImpl
+import view.TicTacToeViewGUI
 import view.TicTacToeViewText
 import javax.swing.JFrame
 import javax.swing.JOptionPane
@@ -35,7 +36,7 @@ fun main(args: Array<String>) {
     val ticTacToeController: ControllerImpl
     if (n == 0) {
 //        val gui = view.TicTacToeViewGUI()
-        val gui = view.TicTacToeViewGUI()
+        val gui = TicTacToeViewGUI()
         gui.title = "Battleship"
         gui.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         ticTacToeController = ControllerImpl(gui)
@@ -51,6 +52,6 @@ fun main(args: Array<String>) {
         println("You chose the text view")
         val text = TicTacToeViewText(10, 10)
         ticTacToeController = ControllerImpl(text)
+
     }
-    ticTacToeController.startGame()
 }
