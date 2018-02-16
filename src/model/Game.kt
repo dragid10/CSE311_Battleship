@@ -1,5 +1,7 @@
 package model
 
+import java.util.*
+
 class Game {
 
     // These values are used for determining who is making a move and who has won.
@@ -11,6 +13,11 @@ class Game {
 
     fun main(args: Array<String>) {
 
+        with(Scanner(System.`in`)) {
+            val x = nextInt()
+            val y = nextInt()
+            val playerMove = Coordinates(x,y)
+        }
 
 
     }
