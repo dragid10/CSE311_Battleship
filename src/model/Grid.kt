@@ -3,21 +3,21 @@ package model
 class Grid{
 
     var gridCoords: HashMap<Coordinates, Int>
-    var gridOwner: Player
 
     val gridSize = 3;
 
-    constructor(gridOwner: Player) {
-        gridCoords = HashMap<Coordinates, Int>()
-        this.gridOwner = gridOwner
+    constructor() {
+        gridCoords = initGrid()
     }
 
     fun getCellStatus(coords: Coordinates): Int? {
         return gridCoords.get(coords);
     }
 
-    fun setCellStatus(coords: Coordinates): {
-        if(getCellStatus(coords) == 0)
+    fun setCellStatus(coords: Coordinates, player: Int): {
+        if(getCellStatus(coords) == 0) {
+            gridCoords.set(coords, player)
+        }
     }
 
     fun initGrid(): HashMap<Coordinates, Int> {
