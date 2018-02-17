@@ -18,6 +18,10 @@ public interface TicTacToeView {
      */
     void updateBoardAsMiss(int x, int y);
 
+    void displayNonEmptySpotError();
+
+    void switchPlayer();
+
     /**
      * Display a sunken ship
      *
