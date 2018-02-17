@@ -1,17 +1,11 @@
 package model
 
-import java.util.*
+class Player(private val playerNumber: Int) {
+//    private val grid = Grid()
 
-class Player {
-
-    constructor()
-
-    fun makeMove() {
-        with(Scanner(System.`in`)) {
-            val x = nextInt()
-            val y = nextInt()
-            val playerMove = Coordinates(x, y)
-        }
+    fun makeMove(x: Int, y: Int) {
+        val playerMove = Coordinates(x, y)
+//        grid.setCellStatus()
     }
 
 }
