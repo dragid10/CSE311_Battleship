@@ -1,44 +1,54 @@
 package controller
 
+import model.Coordinates
+import model.Game
+import model.Grid
 import view.TicTacToeView
 
 class ControllerImpl(private val view: TicTacToeView) : Controller {
-    //    Member Variables
-    lateinit var player1: Player
-    lateinit var player2: Player
+    // ========================= Member Variables =========================
+    lateinit var player: Player
+    //val = immutable
+    //var = mutable
+    val grid = Grid()
+    val game = Game()
+    lateinit var coordinates: Coordinates
 
-    //    Constructor
-    init {
-        view.setController(this)
-    }
 
-    //    Overridden Functions
-
+    // ========================= Overridden Functions =========================
     override fun startGame() {
+        playGame()
+    }
+
+
+    override fun takeSpot(row: Int, column: Int) {
+        coordinates = Coordinates(row, column)
+        if (grid.getCellStatus(coordinates) == 0)
+            grid.setCellStatus(coordinates)
+        else
+            view.displayNonEmptySpotError()
+
 
     }
 
-    override fun takeSpot(coordinate: String) {
+    // ========================= Member Functions =========================
+    private fun playGame() {
+
+        if (game.checkIfWon(grid, player)) {
+            endGame()
+        } else {
+            changePlayer()
+            view.switchPlayer()
+        }
+
 
     }
 
-    //    Member Functions
-
-    /**
-     * This method initializes the game, by randomizing player's ship locations, and setting up the game board
-     * @param
-     * @return Void
-     */
-    fun setupGame() {
-//        Create Players 1 & 2
-        createPlayers()
-
-//        Create gameboard
-        TODO("Do Swing GUI stuff here eventually")
+    private fun changePlayer() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun createPlayers() {
-        player1 = Player()
-        player2 = Player()
+    private fun endGame() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

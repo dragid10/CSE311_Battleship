@@ -1,7 +1,5 @@
 package view;
 
-import controller.ControllerImpl;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -280,11 +278,6 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     @Override
     public void updateBoardAsMiss(int x, int y) {
         // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void setController(ControllerImpl controller) {
 
     }
 

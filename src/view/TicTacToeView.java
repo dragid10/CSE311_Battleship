@@ -1,7 +1,5 @@
 package view;
 
-import controller.ControllerImpl;
-
 public interface TicTacToeView {
 
     /**
@@ -20,12 +18,14 @@ public interface TicTacToeView {
      */
     void updateBoardAsMiss(int x, int y);
 
+    void displayNonEmptySpotError();
+
+    void switchPlayer();
+
     /**
      * Display a sunken ship
      *
      * @param A ship
      */
     //public void displaySunkenShip(Ship ship);
-
-    void setController(ControllerImpl controller);
 }
