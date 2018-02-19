@@ -25,7 +25,7 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
     override fun takeSpot(row: Int, column: Int) {
         currPlayer = game.currPlayer
         coordinates = Coordinates(row, column)
-        if (grid.isFree(coordinates)) {
+        if (grid.getCellStatus(coordinates) == 0) {
             grid.setCellStatus(coordinates, currPlayer)
             if (isPlayerOne()) view.updateBoardForX(coordinates) else view.updateBoardForO(coordinates)
         } else {

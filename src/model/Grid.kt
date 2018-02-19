@@ -9,14 +9,6 @@ class Grid {
         initGrid()
     }
 
-    fun isFree(coords: Coordinates): Boolean {
-        return grid[coords]?.let {
-            println("Row: ${coords.row}\nCol: ${coords.col}")
-            grid[coords] == 0
-
-        } ?: false
-    }
-
     fun getCellStatus(coords: Coordinates): Int? {
         return grid[coords]
     }
