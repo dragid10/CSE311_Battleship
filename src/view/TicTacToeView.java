@@ -2,30 +2,18 @@ package view;
 
 public interface TicTacToeView {
 
-    /**
-     * Display hit on ship
-     *
-     * @param x
-     * @param y
-     */
-    void updateBoardAsHit(int x, int y);
-
-    /**
-     * Display miss fire in water
-     *
-     * @param x
-     * @param y
-     */
-    void updateBoardAsMiss(int x, int y);
-
     void displayNonEmptySpotError();
+
+    void displayOutOfBoundsError();
 
     void switchPlayer();
 
-    /**
-     * Display a sunken ship
-     *
-     * @param A ship
-     */
-    //public void displaySunkenShip(Ship ship);
+    void updateBoardForX(int x, int y);
+
+    void updateBoardForO(int x, int y);
+
+    void gameOutcomeMessage();
+
+    void userInput();
+
 }

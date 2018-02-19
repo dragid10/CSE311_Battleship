@@ -1,61 +1,48 @@
 package model
 
-import java.util.*
-
 class Game {
-
-    var gameGrid : Grid = Grid()
-
-    // Used for checking if a player has won
-    val gridSize = 3
-
-    var gameOver = false
 
     // These values are used for determining who is making a move and who has won.
     val EMPTY_CELL = 0
-    val PLAYER_X =   1
-    val PLAYER_O =   2
-
-    var winner = 0
-
+    private val PLAYER_X = 1
+    private val PLAYER_O = 2
     var turnCount = 1
+    var gameGrid: Grid = Grid()
 
-
+    // Used for checking if a player has won
+//    val gridSize = 3
     var currPlayer = PLAYER_X
+    var gameOver = false
 
-
-    fun main(args: Array<String>) {
-
-        while(!gameOver) {
-
-
-            print("Please input your move: ")
-
-
-            val input = Scanner(System.`in`)
-            val x = input.nextInt()
-            val y = input.nextInt()
-            val playerMove: Coordinates = Coordinates(x, y)
-
-
-            gameOver = hasWon(gameGrid, currPlayer)
-
-            if(gameOver) {
-                winner = currPlayer
-
-            }
-
-            if(turnCount == 9 && !gameOver) {
-                gameOver = true;
-            }
-        }
-
-    }
-
-    fun hasWon(currGrid : Grid, currPlayer : Int) : Boolean {
-
-
-        return false
-    }
-
+//    fun main(args: Array<String>) {
+//
+//        while (!gameOver) {
+//
+//            if (turnCount % 2 == 1) {
+//                println("Player X's turn.")
+//                currPlayer = PLAYER_X
+//            } else {
+//                println("Player O's turn.")
+//                currPlayer = PLAYER_O
+//            }
+//
+//            print("Please input your move: ")
+//
+//            val input = Scanner(System.`in`)
+//            val x = input.nextInt()
+//            val y = input.nextInt()
+//            val playerMove: Coordinates = Coordinates(x, y)
+//
+//
+//            if (gameGrid.isFree(playerMove)) {
+//                if (turnCount % 2 == 1) {
+//                    gameGrid.setCellStatus(playerMove, PLAYER_X)
+//                } else {
+//                    gameGrid.setCellStatus(playerMove, PLAYER_O)
+//                }
+//            }
+//
+//            gameOver = gameGrid.hasWon(currPlayer)
+//        }
+//    }
 }

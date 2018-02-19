@@ -7,24 +7,12 @@ import view.TicTacToeView
 
 class ControllerImpl(private val view: TicTacToeView) : Controller {
     // ========================= Member Variables =========================
-    lateinit var player: Player
     //val = immutable
     //var = mutable
-    val grid = Grid()
-    val game = Game()
+    private val grid = Grid()
+    private val game = Game()
+    private var currPlayer = -1
     lateinit var coordinates: Coordinates
-
-    // These values are used for determining who is making a move and who has won.
-    val EMPTY_CELL = 0
-    val PLAYER_X =   1
-    val PLAYER_O =   2
-
-    var turnCount = 1
-
-    var currPlayer = PLAYER_X
-
-    var gameOver = false
-
 
 
     // ========================= Overridden Functions =========================
@@ -34,37 +22,36 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
 
 
     override fun takeSpot(row: Int, column: Int) {
+        currPlayer = game.currPlayer
         coordinates = Coordinates(row, column)
-        if (grid.getCellStatus(coordinates) == 0)
-            grid.setCellStatus(coordinates)
-        else
+        if (grid.isFree(coordinates)) {
+            grid.setCellStatus(coordinates, currPlayer)
+        } else {
             view.displayNonEmptySpotError()
-
-
+        }
     }
 
     // ========================= Member Functions =========================
     private fun playGame() {
+        //user asked for move
+        //Ask view for user input
+        //view take input
 
-
+//        Set the current user
+        currPlayer = game.currPlayer
+//        Ask the player to make their move
+        view.userInput()
+//        After the user makes their move, check if the user has won the game
         if (game.checkIfWon(grid, player)) {
             endGame()
         } else {
             changePlayer()
             view.switchPlayer()
         }
-
-
     }
 
     private fun changePlayer() {
-        if (turnCount % 2 == 1) {
-            println("Player X's turn.")
-            currPlayer = PLAYER_X
-        } else {
-            println("Player O's turn.")
-            currPlayer = PLAYER_O
-        }
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun endGame() {
