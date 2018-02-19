@@ -9,13 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Game's graphical user interface
- *
- * @author Christian Metz
- * @version 2.0
- * @date 17.01.2012
- */
 public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
     private static JButton buttons[] = new JButton[9]; //create 9 buttons
@@ -24,7 +17,7 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
     public TicTacToeViewGUI() {
         JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
         JPanel panel = new JPanel(); //creating a panel with a box like a tic tac toe board
@@ -34,7 +27,7 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
         for (int i = 0; i <= 8; i++) { //placing the button onto the board
             buttons[i] = new JButton();
-            buttons[i].addActionListener(new myButtonListener());
+            buttons[i].addActionListener(new MyButtonListener());
             panel.add(buttons[i]);
         }
 
@@ -123,14 +116,12 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     @Override
     public void userInput() {
         //the button they clicked???
-
     }
 
-    private class myButtonListener implements ActionListener {
+    private class MyButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             buttonClicked = (JButton) e.getSource();
 
-            // TODO: 2/19/2018 - Figure out how to translate the button click location to something the controller can use
             // https://stackoverflow.com/questions/22580243/get-position-of-the-button-on-gridlayout
             // http://www.cbseguy.com/row-column-major-address-calculations-cbse/
             for (int i = 0; i < 9; i++) {

@@ -10,22 +10,11 @@ class Game {
     var gameGrid: Grid = Grid()
 
     // Used for checking if a player has won
-//    val gridSize = 3
-    var currPlayer = PLAYER_X
+    var currPlayer = 1
+    var winner = 0
+    var playerWon = false
     var gameOver = false
 
-    fun updatePlayer(newPlayer: Int) {
-        if (newPlayer == 1 || newPlayer == 2)
-            turnCount = newPlayer
-    }
-
-    fun checkIfWon(grid: Grid, player: Int): Boolean {
-
-        for (i in 1..3) {
-        }
-
-        return false
-    }
 //    fun main(args: Array<String>) {
 //
 //        while (!gameOver) {
@@ -43,18 +32,74 @@ class Game {
 //            val input = Scanner(System.`in`)
 //            val x = input.nextInt()
 //            val y = input.nextInt()
-//            val playerMove: Coordinates = Coordinates(x, y)
+//            val lastMove = Coordinates(x, y)
 //
+//            if (gameGrid.getCellStatus(lastMove) == EMPTY_CELL) {
+//                gameGrid.setCellStatus(lastMove, currPlayer)
 //
-//            if (gameGrid.isFree(playerMove)) {
-//                if (turnCount % 2 == 1) {
-//                    gameGrid.setCellStatus(playerMove, PLAYER_X)
+//                playerWon = hasWon(currPlayer, lastMove)
+//
+//                if (playerWon) {
+//                    gameOver = true
+//                    winner = currPlayer
+//                } else if (!playerWon && turnCount == 9) {
+//                    gameOver = true
+//                    winner = 0
 //                } else {
-//                    gameGrid.setCellStatus(playerMove, PLAYER_O)
+//                    turnCount++
+//
 //                }
 //            }
-//
-//            gameOver = gameGrid.hasWon(currPlayer)
 //        }
 //    }
+
+    fun hasWon(currPlayer: Int, lastMove: Coordinates): Boolean {
+
+        val row = lastMove.row
+        val col = lastMove.column
+
+        // Check row win
+        for (n in 1..3) {
+            if (gameGrid.getCellStatus(Coordinates(n, col)) != currPlayer) {
+                break
+            } else {
+                return true
+            }
+        }
+
+        // Check col win
+        for (n in 1..3) {
+            if (gameGrid.getCellStatus(Coordinates(row, n)) != currPlayer) {
+                break
+            } else {
+                return true
+            }
+        }
+
+        // Check diagonal win
+        for (n in 1..3) {
+            if (gameGrid.getCellStatus(Coordinates(n, n)) != currPlayer) {
+                break
+            } else {
+                return true
+            }
+        }
+
+        // Check reverse diagonal win
+        for (n in 1..3) {
+            if (gameGrid.getCellStatus(Coordinates(4 - n, n)) != currPlayer) {
+                break
+            } else {
+                return true
+            }
+        }
+
+        // If none of the win conditions return true. No one won. Return false.
+        return false
+    }
+
+    fun updatePlayer(newPlayer: Int) {
+        currPlayer = newPlayer
+    }
+
 }
