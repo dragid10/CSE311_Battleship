@@ -14,6 +14,18 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
     val game = Game()
     lateinit var coordinates: Coordinates
 
+    // These values are used for determining who is making a move and who has won.
+    val EMPTY_CELL = 0
+    val PLAYER_X =   1
+    val PLAYER_O =   2
+
+    var turnCount = 1
+
+    var currPlayer = PLAYER_X
+
+    var gameOver = false
+
+
 
     // ========================= Overridden Functions =========================
     override fun startGame() {
@@ -34,6 +46,7 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
     // ========================= Member Functions =========================
     private fun playGame() {
 
+
         if (game.checkIfWon(grid, player)) {
             endGame()
         } else {
@@ -45,7 +58,13 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
     }
 
     private fun changePlayer() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (turnCount % 2 == 1) {
+            println("Player X's turn.")
+            currPlayer = PLAYER_X
+        } else {
+            println("Player O's turn.")
+            currPlayer = PLAYER_O
+        }
     }
 
     private fun endGame() {
