@@ -1,12 +1,15 @@
 package view;
 
+import model.Coordinates;
+
 import java.util.Scanner;
 
 public class TicTacToeViewText implements TicTacToeView {
     Scanner input = new Scanner(System.in);
-    public static final boolean DEBUG = false;
-    String[][] board;
-    int row, col;
+    private static final boolean DEBUG = false;
+    private final String[][] board;
+    private int row;
+    private int col;
 
     public TicTacToeViewText() {
         board = new String[3][3];
@@ -18,7 +21,7 @@ public class TicTacToeViewText implements TicTacToeView {
     }
 
 
-    public static void breakln() {
+    private static void breakln() {
         System.out.println("_____________________________________");
         System.out.println("Game Board layout: ");
         //System.out.println("     columns");
@@ -29,7 +32,7 @@ public class TicTacToeViewText implements TicTacToeView {
         System.out.println("");
     }
 
-    public static void createBoard(String[][] board) {
+    private static void createBoard(String[][] board) {
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
                 board[r][c] = "-";
@@ -37,10 +40,10 @@ public class TicTacToeViewText implements TicTacToeView {
         }
     }
 
-    public static void showBoard(String[][] board) {
+    private static void showBoard(String[][] board) {
         breakln();
         for (int r = 0; r < board.length; r++) {
-            if (DEBUG == true) {
+            if (DEBUG) {
                 for (int c = 0; c < board[0].length; c++) {
                     System.out.print(" " + board[r][c]);
                 }
@@ -66,35 +69,46 @@ public class TicTacToeViewText implements TicTacToeView {
         System.out.println("Select a space to play in: ");
         pos = input.nextInt();
 
-        if (pos == 1) {
-            row = 1;
-            col = 1;
-        } else if (pos == 2) {
-            row = 1;
-            col = 2;
-        } else if (pos == 3) {
-            row = 1;
-            col = 3;
-        } else if (pos == 4) {
-            row = 2;
-            col = 1;
-        } else if (pos == 5) {
-            row = 2;
-            col = 2;
-        } else if (pos == 6) {
-            row = 2;
-            col = 3;
-        } else if (pos == 7) {
-            row = 3;
-            col = 1;
-        } else if (pos == 8) {
-            row = 3;
-            col = 2;
-        } else if (pos == 9) {
-            row = 3;
-            col = 3;
-        } else {
-            displayOutOfBoundsError();
+        switch (pos) {
+            case 1:
+                row = 1;
+                col = 1;
+                break;
+            case 2:
+                row = 1;
+                col = 2;
+                break;
+            case 3:
+                row = 1;
+                col = 3;
+                break;
+            case 4:
+                row = 2;
+                col = 1;
+                break;
+            case 5:
+                row = 2;
+                col = 2;
+                break;
+            case 6:
+                row = 2;
+                col = 3;
+                break;
+            case 7:
+                row = 3;
+                col = 1;
+                break;
+            case 8:
+                row = 3;
+                col = 2;
+                break;
+            case 9:
+                row = 3;
+                col = 3;
+                break;
+            default:
+                displayOutOfBoundsError();
+                break;
         }
     }
 
@@ -103,19 +117,17 @@ public class TicTacToeViewText implements TicTacToeView {
      *
      * @return int row
      */
-    public int getRow() {
+    private void getRow() {
         System.out.println("Row: " + row);
-        return row;
     }
 
     /**
-     * gets the column of the user input
+     * gets the col of the user input
      *
      * @return int col
      */
-    public int getCol() {
+    private void getCol() {
         System.out.println("Col: " + col);
-        return col;
     }
 
     @Override
@@ -146,15 +158,15 @@ public class TicTacToeViewText implements TicTacToeView {
     }
 
     @Override
-    public void updateBoardForX(int x, int y) {
-        board[x][y] = "X";
+    public void updateBoardForX(Coordinates coords) {
+        board[coords.getRow()][coords.getCol()] = "X";
 
     }
 
 
     @Override
-    public void updateBoardForO(int x, int y) {
-        board[x][y] = "O";
+    public void updateBoardForO(Coordinates coords) {
+        board[coords.getRow()][coords.getCol()] = "O";
     }
 
 

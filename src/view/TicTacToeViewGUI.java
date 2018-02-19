@@ -2,27 +2,22 @@ package view;
 
 import controller.Controller;
 import controller.ControllerImpl;
+import model.Coordinates;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Game's graphical user interface
- *
- * @author Christian Metz
- * @version 2.0
- * @date 17.01.2012
- */
 public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
-    private static JButton buttons[] = new JButton[9]; //create 9 buttons
-    private Controller myController = new ControllerImpl(this);
+    private static final JButton[] buttons = new JButton[9]; //create 9 buttons
+    private JButton buttonClicked;
+    private final Controller myController = new ControllerImpl(this);
 
     public TicTacToeViewGUI() {
         JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
         JPanel panel = new JPanel(); //creating a panel with a box like a tic tac toe board
@@ -32,7 +27,7 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
         for (int i = 0; i <= 8; i++) { //placing the button onto the board
             buttons[i] = new JButton();
-            buttons[i].addActionListener(new myButtonListener());
+            buttons[i].addActionListener(new MyButtonListener());
             panel.add(buttons[i]);
         }
 
@@ -80,17 +75,19 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     }
 
     @Override
-    public void updateBoardForX(int x, int y) {
-        // TODO Auto-generated method stub
-        //?????
+    public void updateBoardForX(Coordinates coords) {
+        int row = coords.getRow();
+        int col = coords.getCol();
+        buttonClicked.setText("X");
+
 
     }
 
     @Override
-    public void updateBoardForO(int x, int y) {
-        // TODO Auto-generated method stub
-        //?????
-
+    public void updateBoardForO(Coordinates coords) {
+        int row = coords.getRow();
+        int col = coords.getCol();
+        buttonClicked.setText("O");
     }
 
     @Override
@@ -119,25 +116,23 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     @Override
     public void userInput() {
         //the button they clicked???
-
     }
 
-    private class myButtonListener implements ActionListener {
+    private class MyButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            JButton buttonClicked = (JButton) e.getSource();
+            buttonClicked = (JButton) e.getSource();
 
-            // TODO: 2/19/2018 - Figure out how to translate the button click location to something the controller can use
             // https://stackoverflow.com/questions/22580243/get-position-of-the-button-on-gridlayout
             // http://www.cbseguy.com/row-column-major-address-calculations-cbse/
             for (int i = 0; i < 9; i++) {
                 if (buttons[i] == buttonClicked) {
-                    int row = i % 3;
-                    int col = i / 3;
+                    int row = i / 3;
+                    int col = i % 3;
 //                    System.out.printf("Row: %s", row);
 //                    System.out.println();
 //                    System.out.printf("Col: %s", col);
 //                    System.out.println();
-                    myController.takeSpot(row, col);
+                    myController.takeSpot(row + 1, col + 1);
                 }
             }
             // if it is x's turn (somehow call updateBoardForX())
