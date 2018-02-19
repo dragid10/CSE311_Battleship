@@ -11,9 +11,9 @@ import java.awt.event.ActionListener;
 
 public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
-    private static JButton buttons[] = new JButton[9]; //create 9 buttons
+    private static final JButton[] buttons = new JButton[9]; //create 9 buttons
     private JButton buttonClicked;
-    private Controller myController = new ControllerImpl(this);
+    private final Controller myController = new ControllerImpl(this);
 
     public TicTacToeViewGUI() {
         JFrame frame = new JFrame();
@@ -77,7 +77,7 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     @Override
     public void updateBoardForX(Coordinates coords) {
         int row = coords.getRow();
-        int col = coords.getColumn();
+        int col = coords.getCol();
         buttonClicked.setText("X");
 
 
@@ -86,7 +86,7 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     @Override
     public void updateBoardForO(Coordinates coords) {
         int row = coords.getRow();
-        int col = coords.getColumn();
+        int col = coords.getCol();
         buttonClicked.setText("O");
     }
 

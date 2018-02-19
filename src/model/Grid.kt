@@ -10,12 +10,11 @@ class Grid {
     }
 
     fun isFree(coords: Coordinates): Boolean {
-        val retVal = grid[coords]?.let {
-            println("Row: ${coords.row}\nCol: ${coords.column}")
-            grid[coords]?.toInt() == 0
+        return grid[coords]?.let {
+            println("Row: ${coords.row}\nCol: ${coords.col}")
+            grid[coords] == 0
 
         } ?: false
-        return retVal
     }
 
     fun getCellStatus(coords: Coordinates): Int? {

@@ -12,7 +12,7 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
     private val grid = Grid()
     private val game = Game()
     private var currPlayer = -1
-    lateinit var coordinates: Coordinates
+    private lateinit var coordinates: Coordinates
 
 
     // ========================= Overridden Functions =========================
