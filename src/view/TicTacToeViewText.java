@@ -6,16 +6,26 @@ public class TicTacToeViewText implements TicTacToeView {
     Scanner input = new Scanner(System.in);
     public static final boolean DEBUG = false;
     String[][] board;
+    int row, col;
 
-    public TicTacToeViewText(int numRows, int numCols) {
-        board = new String[numRows][numCols];
+    public TicTacToeViewText() {
+        board = new String[3][3];
         createBoard(board);
         showBoard(board);
+        userInput();
+        getRow();
+        getCol();
     }
 
 
     public static void breakln() {
         System.out.println("_____________________________________");
+        System.out.println("Game Board layout: ");
+        //System.out.println("     columns");
+        System.out.println("1 2 3");
+        System.out.println("4 5 6");
+        System.out.println("7 8 9");
+
         System.out.println("");
     }
 
@@ -49,18 +59,114 @@ public class TicTacToeViewText implements TicTacToeView {
         breakln();
     }
 
+    @Override
+    public void userInput() {
+        Scanner input = new Scanner(System.in);
+        int pos;
+        System.out.println("Select a space to play in: ");
+        pos = input.nextInt();
+
+        if (pos == 1) {
+            row = 1;
+            col = 1;
+        } else if (pos == 2) {
+            row = 1;
+            col = 2;
+        } else if (pos == 3) {
+            row = 1;
+            col = 3;
+        } else if (pos == 4) {
+            row = 2;
+            col = 1;
+        } else if (pos == 5) {
+            row = 2;
+            col = 2;
+        } else if (pos == 6) {
+            row = 2;
+            col = 3;
+        } else if (pos == 7) {
+            row = 3;
+            col = 1;
+        } else if (pos == 8) {
+            row = 3;
+            col = 2;
+        } else if (pos == 9) {
+            row = 3;
+            col = 3;
+        } else {
+            displayOutOfBoundsError();
+        }
+    }
+
+    /**
+     * gets the row of the user input
+     *
+     * @return int row
+     */
+    public int getRow() {
+        System.out.println("Row: " + row);
+        return row;
+    }
+
+    /**
+     * gets the column of the user input
+     *
+     * @return int col
+     */
+    public int getCol() {
+        System.out.println("Col: " + col);
+        return col;
+    }
 
     @Override
-    public void updateBoardAsHit(int x, int y) {
-        // TODO Auto-generated method stub
-        board[x][y] = "*";
+    public void displayNonEmptySpotError() {
+        System.out.println("Error: This not an empty space.");
 
     }
 
     @Override
-    public void updateBoardAsMiss(int x, int y) {
-        // TODO Auto-generated method stub
-        board[x][y] = "M";
+    public void displayOutOfBoundsError() {
+        // if the user selects a value that is not between 1 and 9
+        System.out.println("Error: That is not a valid spot on the game board!");
+    }
+
+
+    @Override
+    public void switchPlayer() {
+        //assuming we always start with player X
+        // at beginning of game
+        System.out.println("Player X's turn!");
+
+        // assuming turn count starts at 0 and increments after a player has played their turn
+        // if turn count is odd
+        System.out.println("Player O's turn");
+        // if turn count is even
+        System.out.println("player X's turn");
 
     }
+
+
+    @Override
+    public void updateBoardForX(int x, int y) {
+        board[x][y] = "X";
+
+    }
+
+
+    @Override
+    public void updateBoardForO(int x, int y) {
+        board[x][y] = "O";
+    }
+
+
+    @Override
+    public void gameOutcomeMessage() {
+        // If player X wins
+        System.out.println("Player X wins!");
+        // If player Y wins
+        System.out.println("Player Y wins!");
+        // If neither player wins
+        System.out.println("It's a draw!");
+    }
+
 }

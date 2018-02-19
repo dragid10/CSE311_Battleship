@@ -1,11 +1,9 @@
 package view;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Game's graphical user interface
@@ -16,290 +14,113 @@ import java.io.IOException;
  */
 public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
-    // GameBoard properties (square dimension)
-    private final int SIZE = 10;
-    private final int FIELD_SIZE = 34; // = 32px because of the border
-
-    // contains all JButtons of the grid
-    private final JButton gameFieldGUI[][] = new JButton[10][10];
-    private final JPanel gamePanel = new JPanel();
-
-    // resource path to the game's graphics
-    private final String IMAGE_PATH = "../battleship/resources/images/";
+    private static JButton buttons[] = new JButton[9]; //create 9 buttons
 
     public TicTacToeViewGUI() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (Exception e) {
-            System.out.println(e);
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        JPanel panel = new JPanel(); //creating a panel with a box like a tic tac toe board
+        panel.setLayout(new GridLayout(3, 3));
+        panel.setBorder(BorderFactory.createLineBorder(Color.gray, 3));
+        panel.setBackground(Color.white);
+
+        for (int i = 0; i <= 8; i++) { //placing the button onto the board
+            buttons[i] = new JButton();
+            buttons[i].addActionListener(new myButtonListener());
+            panel.add(buttons[i]);
         }
 
-        // set GameField -> to use its shoot() method
-
-
-        gamePanel.setLayout(new GridBagLayout());
-        gamePanel.setPreferredSize(new Dimension(340, 340));
-        gamePanel.setBackground(new Color(131, 209, 232));
-        gamePanel.setBorder(BorderFactory.createLineBorder(new Color(32, 156, 185)));
-
-        buildFields();
-
-        //this.setTitle("Battleship");
-        this.setPreferredSize(new Dimension(400, 400));
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(gamePanel);
-        this.pack();
-        this.setVisible(true);
-    }
-
-    /**
-     * Display skrike shot
-     *
-     * @param x
-     * @param y
-     */
-    public void displayStrike(int x, int y) {
-        // get button and update its icon
-        JButton field = getField(x, y);
-        setFieldIcon(field, "strike.png");
-    }
-
-    /**
-     * Display missed shot
-     *
-     * @param x
-     * @param y
-     */
-    public void displayMissed(int x, int y) {
-        JButton field = getField(x, y);
-        field.setBackground(new Color(85, 185, 218));
-    }
-
-    /**
-     * Display sunken ship
-     *
-     * @param ship
-     */
-  /*public void displayShip(Ship ship)
-  {
-    displayShip(ship.getType(), ship.getX(), ship.getY(), ship.isHorizontal(), ship.getLength());
-  }*/
-
-    /**
-     * Display ship
-     * - ship is sunken
-     * - to see your own ships
-     *
-     * @param type
-     * @param x
-     * @param y
-     * @param horizontal
-     * @param length
-     */
-    public void displayShip(String type, int x, int y, boolean horizontal, int length) {
-        // System.out.printf("type: %s, x: %d, y: %d, horizontal: %b length: %d\n", type, x, y, horizontal, length);
-
-        // create new button
-        JButton button = new JButton();
-        button.setOpaque(false);
-        button.setContentAreaFilled(false);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorder(BorderFactory.createLineBorder(new Color(32, 156, 185)));
-        // add click listener for sunken ships
-        button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent event) {
-                System.out.println("Ship sunken");
-            }
-        });
-
-        // grid prefs for the new button
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-
-        // set position
-        c.gridx = x;
-        c.gridy = y;
-
-        // button dimensions
-        int width = 34;
-        int height = 34;
-
-        // occupy ship field in grid
-        if (horizontal) {
-            // horizontal
-            c.gridwidth = length;
-            c.gridheight = 1;
-            width = 34 * length;
-        } else {
-            // vertical
-            c.gridwidth = 1;
-            c.gridheight = length;
-            height = 34 * length;
-        }
-
-        // maybe update array reference ?!
-        // setField(x, y, button);
-
-        // select the ship type's preferences
-        button.setPreferredSize(new Dimension(width, height));
-
-        // remove old elements
-        removeFields(x, y, horizontal, length);
-        setFieldIcon(button, "ship_" + type + (horizontal ? "h" : "v") + ".png");
-
-        // add new button and update the grid
-        gamePanel.add(button, c);
-        gamePanel.revalidate();
-        gamePanel.repaint();
-    }
-
-    /**
-     * Field action handler
-     *
-     * @param x X coordinate
-     * @param y y coordinate
-     * @return strike
-     */
- /* private boolean shoot(int x, int y)
-  {
-    // calls GameField's shoot method
-    System.out.printf("At cell %d,%d\n", x, y);
-    return gameField.shoot(x, y);
-  }*/
-
-    /**
-     * Build fields with buttons and register action handler
-     */
-    private void buildFields() {
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-
-        for (int col = 0; col < 10; col++) {
-            for (int row = 0; row < 10; row++) {
-                JButton button = new JButton();
-                button.setBackground(new Color(131, 209, 232));
-                button.setBorder(BorderFactory.createLineBorder(new Color(32, 156, 185)));
-                button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                button.setPreferredSize(new java.awt.Dimension(FIELD_SIZE, FIELD_SIZE));
-                button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mousePressed(MouseEvent event) {
-                        JButton button = (JButton) event.getSource();
-                        Rectangle rectangle = button.getBounds();
-                        Point point = button.getLocation();
-
-                        // claculate field position
-                        int row = point.y / rectangle.height;
-                        int col = point.x / rectangle.width;
-
-                        // shoot on field
-                        //shoot(col, row);
-                    }
-                });
-
-                // add button to GUI grid-manager
-                setField(col, row, button);
-
-                // set field position
-                c.gridx = col;
-                c.gridy = row;
-
-                // add field to the grid
-                gamePanel.add(button, c);
-            }
-        }
-    }
-
-    /**
-     * Set object on specified field position
-     *
-     * @param x
-     * @param y
-     */
-    private void setField(int x, int y, JButton obj) {
-        gameFieldGUI[y][x] = obj;
-    }
-
-    /**
-     * Get object on specified field position
-     *
-     * @param x
-     * @param y
-     * @return JButton instance on the field position
-     */
-    private JButton getField(int x, int y) {
-        return gameFieldGUI[y][x];
-    }
-
-    /**
-     * Remove fields
-     *
-     * @param x
-     * @param y
-     * @param horizontal
-     * @param length
-     * @see displayShip()
-     */
-    private void removeFields(int x, int y, boolean horizontal, int length) {
-        for (int i = 0; i < length; i++) {
-            if (horizontal) {
-                gamePanel.remove(getField(x + i, y));
-            } else {
-                gamePanel.remove(getField(x, y + i));
-            }
-        }
-    }
-
-    /**
-     * Helper to set Field icon
-     * accoring to a image path
-     *
-     * @param field
-     * @param imgPath
-     * @see displayShip()
-     */
-    private void setFieldIcon(JButton field, String imgPath) {
-        try {
-            Image img = ImageIO.read(getClass().getResource(IMAGE_PATH + imgPath));
-            field.setIcon(new ImageIcon(img));
-        } catch (IOException e) {
-            System.out.println("Couldn't set field icon: " + e);
-        }
+        frame.getContentPane().add(panel);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setSize(500, 500);
+        frame.setTitle("Tic Tac Toe - PLAYER X's TURN");
     }
 
     @Override
-    public void updateBoardAsHit(int x, int y) {
+    public void displayNonEmptySpotError() {
+        JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame,
+                "Error: This not an empty space!",
+                "Inane warning",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void displayOutOfBoundsError() {
+        JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame,
+                "Error: That is not a valid spot on the game board!",
+                "Inane warning",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void switchPlayer() {
+        //assuming we always start with player X at the beginning of the game
+        //this.setTitle("TicTacToe - PLAYER X's TURN");
+        // assuming turn count starts at 0 and increments after a player has played their turn
+        // if turn count is odd
+        this.setTitle("TicTacToe - PLAYER O's TURN");
+        // if turn count is even
+        this.setTitle("TicTacToe - PLAYER X's TURN");
+    }
+
+    @Override
+    public void updateBoardForX(int x, int y) {
         // TODO Auto-generated method stub
+        //?????
 
     }
 
     @Override
-    public void updateBoardAsMiss(int x, int y) {
+    public void updateBoardForO(int x, int y) {
         // TODO Auto-generated method stub
+        //?????
 
     }
 
-  /*public void addHighscore()
-  {
-    String s = (String) JOptionPane.showInputDialog(frame,
-                    "Complete the sentence:\n"
-                    + "\"Green eggs and...\"",
-                    "Customized Dialog",
-                    JOptionPane.PLAIN_MESSAGE,
-                    icon,
-                    possibilities,
-                    "ham");*/
+    @Override
+    public void gameOutcomeMessage() {
+        JFrame frame = new JFrame();
+        //if player X wins
+        JOptionPane.showMessageDialog(frame,
+                "Player X wins!",
+                "A plain message",
+                JOptionPane.PLAIN_MESSAGE);
 
-    //If a string was returned, say so.
-    /*if ((s != null) && (s.length() > 0)) {
-      setLabel("Green eggs and... " + s + "!");
-      return;
+        //if player o wins
+        JOptionPane.showMessageDialog(frame,
+                "Player O wins!",
+                "A plain message",
+                JOptionPane.PLAIN_MESSAGE);
+
+        //if it is a draw
+        JOptionPane.showMessageDialog(frame,
+                "It is a Draw!",
+                "A plain message",
+                JOptionPane.PLAIN_MESSAGE);
+
     }
-    
-    //If you're here, the return value was null/empty.
-    setLabel("Come on, finish the sentence!");
-  }*/
+
+    @Override
+    public void userInput() {
+        // TODO Auto-generated method stub
+        //the button they clicked???
+        //?????
+
+    }
+
+    private class myButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            JButton buttonClicked = (JButton) e.getSource();
+            // if it is x's turn (somehow call updateBoardForX())
+            buttonClicked.setText("X");
+            //if it is o's turn (somehow call updateBoardForO())
+            buttonClicked.setText("O");
+        }
+    }
 
 }
