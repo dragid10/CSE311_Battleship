@@ -26,6 +26,7 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
         coordinates = Coordinates(row, column)
         if (grid.isFree(coordinates)) {
             grid.setCellStatus(coordinates, currPlayer)
+            if (isPlayerOne()) view.updateBoardForX(coordinates) else view.updateBoardForO(coordinates)
         } else {
             view.displayNonEmptySpotError()
         }
@@ -40,7 +41,7 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
 //        Set the current user
         currPlayer = game.currPlayer
 //        Ask the player to make their move
-//        view.userInput()
+        view.userInput()
 //        After the user makes their move, check if the user has won the game
         if (game.checkIfWon(grid, currPlayer)) {
             endGame()

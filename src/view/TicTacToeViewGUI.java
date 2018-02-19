@@ -2,6 +2,7 @@ package view;
 
 import controller.Controller;
 import controller.ControllerImpl;
+import model.Coordinates;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ import java.awt.event.ActionListener;
 public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
     private static JButton buttons[] = new JButton[9]; //create 9 buttons
+    private JButton buttonClicked;
     private Controller myController = new ControllerImpl(this);
 
     public TicTacToeViewGUI() {
@@ -80,17 +82,19 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     }
 
     @Override
-    public void updateBoardForX(int x, int y) {
-        // TODO Auto-generated method stub
-        //?????
+    public void updateBoardForX(Coordinates coords) {
+        int row = coords.getRow();
+        int col = coords.getColumn();
+        buttonClicked.setText("X");
+
 
     }
 
     @Override
-    public void updateBoardForO(int x, int y) {
-        // TODO Auto-generated method stub
-        //?????
-
+    public void updateBoardForO(Coordinates coords) {
+        int row = coords.getRow();
+        int col = coords.getColumn();
+        buttonClicked.setText("O");
     }
 
     @Override
@@ -124,20 +128,20 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
     private class myButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            JButton buttonClicked = (JButton) e.getSource();
+            buttonClicked = (JButton) e.getSource();
 
             // TODO: 2/19/2018 - Figure out how to translate the button click location to something the controller can use
             // https://stackoverflow.com/questions/22580243/get-position-of-the-button-on-gridlayout
             // http://www.cbseguy.com/row-column-major-address-calculations-cbse/
             for (int i = 0; i < 9; i++) {
                 if (buttons[i] == buttonClicked) {
-                    int row = i % 3;
-                    int col = i / 3;
+                    int row = i / 3;
+                    int col = i % 3;
 //                    System.out.printf("Row: %s", row);
 //                    System.out.println();
 //                    System.out.printf("Col: %s", col);
 //                    System.out.println();
-                    myController.takeSpot(row, col);
+                    myController.takeSpot(row + 1, col + 1);
                 }
             }
             // if it is x's turn (somehow call updateBoardForX())

@@ -1,5 +1,7 @@
 package view;
 
+import model.Coordinates;
+
 public interface TicTacToeView {
 
     void displayNonEmptySpotError();
@@ -10,9 +12,9 @@ public interface TicTacToeView {
 
     void switchToPlayerO();
 
-    void updateBoardForX(int x, int y);
+    void updateBoardForX(Coordinates coords);
 
-    void updateBoardForO(int x, int y);
+    void updateBoardForO(Coordinates coords);
 
     void gameOutcomeMessage();
 

@@ -1,5 +1,7 @@
 package view;
 
+import model.Coordinates;
+
 import java.util.Scanner;
 
 public class TicTacToeViewText implements TicTacToeView {
@@ -146,15 +148,15 @@ public class TicTacToeViewText implements TicTacToeView {
     }
 
     @Override
-    public void updateBoardForX(int x, int y) {
-        board[x][y] = "X";
+    public void updateBoardForX(Coordinates coords) {
+        board[coords.getRow()][coords.getColumn()] = "X";
 
     }
 
 
     @Override
-    public void updateBoardForO(int x, int y) {
-        board[x][y] = "O";
+    public void updateBoardForO(Coordinates coords) {
+        board[coords.getRow()][coords.getColumn()] = "O";
     }
 
 
