@@ -12,9 +12,9 @@ class Game {
     var gameGrid: Grid = Grid()
 
     // Used for checking if a player has won
-//    val gridSize = 3
-    var currPlayer = PLAYER_X
+    var currPlayer = -1
     var winner = 0
+    var playerWon = false
     var gameOver = false
 
     fun main(args: Array<String>) {
@@ -36,26 +36,24 @@ class Game {
             val y = input.nextInt()
             val lastMove = Coordinates(x, y)
 
+            if (gameGrid.getCellStatus(lastMove) == EMPTY_CELL) {
+                gameGrid.setCellStatus(lastMove, currPlayer)
 
-            if (gameGrid.isFree(lastMove)) {
-                if (turnCount % 2 == 1) {
-                    gameGrid.setCellStatus(lastMove, PLAYER_X)
+                playerWon = hasWon(currPlayer, lastMove)
+
+                if (playerWon) {
+                    gameOver = true
+                    winner = currPlayer
+                } else if (!playerWon && turnCount == 9) {
+                    gameOver = true
+                    winner = 0
                 } else {
-                    gameGrid.setCellStatus(lastMove, PLAYER_O)
+                    turnCount++
+
                 }
             }
-
-            gameOver = hasWon(currPlayer, lastMove)
-
-            if (!gameOver && turnCount == 9) {
-                gameOver = true
-                winner = 0
-            }
-
-
         }
     }
-
 
     fun hasWon(currPlayer: Int, lastMove: Coordinates): Boolean {
 
