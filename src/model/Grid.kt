@@ -9,8 +9,8 @@ class Grid {
         grid = initGrid()
     }
 
-    fun getCellStatus(coords: Coordinates) : Int? {
-        return grid.get(coords)
+    fun getCellStatus(coords: Coordinates): Int? {
+        return grid[coords]
     }
 
     fun setCellStatus(coords: Coordinates, player: Int) {
