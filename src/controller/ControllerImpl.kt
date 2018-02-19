@@ -12,12 +12,13 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
     private val grid = Grid()
     private val game = Game()
     private var currPlayer = -1
-    lateinit var coordinates: Coordinates
+    private lateinit var coordinates: Coordinates
 
 
     // ========================= Overridden Functions =========================
     override fun startGame() {
-        playGame()
+//        playGame()
+        setCurrentPlayer()
     }
 
 
@@ -26,23 +27,29 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
         coordinates = Coordinates(row, column)
         if (grid.isFree(coordinates)) {
             grid.setCellStatus(coordinates, currPlayer)
+            if (isPlayerOne()) view.updateBoardForX(coordinates) else view.updateBoardForO(coordinates)
         } else {
             view.displayNonEmptySpotError()
         }
+        checkIfGameWon()
+        changePlayer()
     }
 
     // ========================= Member Functions =========================
     private fun playGame() {
-        //user asked for move
-        //Ask view for user input
-        //view take input
-
 //        Set the current user
-        currPlayer = game.currPlayer
-//        Ask the player to make their move
-//        view.userInput()
+//        setCurrentPlayer()
+
 //        After the user makes their move, check if the user has won the game
-        if (game.checkIfWon(grid, currPlayer)) {
+//        checkIfGameWon()
+    }
+
+    private fun setCurrentPlayer() {
+        currPlayer = game.currPlayer
+    }
+
+    private fun checkIfGameWon() {
+        if (game.hasWon(currPlayer, coordinates)) {
             endGame()
         } else {
             changePlayer()
@@ -61,6 +68,7 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
     }
 
     private fun endGame() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // Tell view a player has won
+        // Close stuff??
     }
 }

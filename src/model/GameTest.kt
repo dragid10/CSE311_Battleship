@@ -1,7 +1,5 @@
 package model
 
-import org.junit.jupiter.api.Assertions.*
-
 internal class GameTest {
 
     @org.junit.jupiter.api.Test

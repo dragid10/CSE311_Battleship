@@ -5,7 +5,7 @@ import java.util.*
 class Game {
 
     // These values are used for determining who is making a move and who has won.
-    val EMPTY_CELL = 0
+    private val EMPTY_CELL = 0
     private val PLAYER_X = 1
     private val PLAYER_O = 2
 
@@ -13,19 +13,19 @@ class Game {
     var currPlayer = -1
 
     // Determines if the game ended in a Draw (0) or if Player X (1) or Player O (2) won.
-    var winner = 0
+    private var winner = 0
 
     // Used to see if a player has won during their turn.
-    var playerWon = false
+    private var playerWon = false
 
     // Used to see if the game has ended after a turn.
-    var gameOver = false
+    private var gameOver = false
 
     // Used for determining which player goes next and if there is a tie.
-    var turnCount = 1
+    private var turnCount = 1
 
     // Initializes the game's grid.
-    var gameGrid: Grid = Grid()
+    private var gameGrid: Grid = Grid()
 
     /**
      * This function will loop until either player has won or the game results in a draw.
@@ -85,15 +85,15 @@ class Game {
 
     /**
      * Uses the currently player's move to determine if they won during their turn.
-     * Checks the row and column the last move was made in and checks the two diagonals.
-     * If all of the cells in a row, column, diagonal, or reverse diagonal are owned
+     * Checks the row and col the last move was made in and checks the two diagonals.
+     * If all of the cells in a row, col, diagonal, or reverse diagonal are owned
      * by the player, then the player has won the game.     *
      *
      * @param currPlayer The player who is currently taking their turn.
      * @param lastMove The move the current player just made.
      * @return If the player has won the game.
      */
-    private fun hasWon(currPlayer: Int, lastMove: Coordinates): Boolean {
+    fun hasWon(currPlayer: Int, lastMove: Coordinates): Boolean {
 
         val row = lastMove.row
         val col = lastMove.col
@@ -107,7 +107,7 @@ class Game {
             }
         }
 
-        // Checks column win.
+        // Checks col win.
         for (n in 1..3) {
             if (gameGrid.getCellStatus(Coordinates(row, n)) != currPlayer) {
                 break
@@ -136,6 +136,10 @@ class Game {
 
         // If none of the win conditions return true. The player didn't won.
         return false
+    }
+
+    fun updatePlayer(newPlayer: Int) {
+        currPlayer = newPlayer
     }
 
 }
