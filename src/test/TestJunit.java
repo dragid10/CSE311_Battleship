@@ -1,10 +1,8 @@
-package model;
+package test;
+
 
 public class TestJunit {
-
-
-
-    public String verticalWin(){
+/*    public String verticalWin(){
 
         Grid grid = new Grid();
         Coordinates coor = new Coordinates(1,2);
@@ -107,6 +105,6 @@ public class TestJunit {
             }
         }
        return "true";
-    }
+    }*/
 
 }
