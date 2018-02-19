@@ -1,5 +1,8 @@
 package view;
 
+import controller.Controller;
+import controller.ControllerImpl;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +18,7 @@ import java.awt.event.ActionListener;
 public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
     private static JButton buttons[] = new JButton[9]; //create 9 buttons
+    private Controller myController = new ControllerImpl(this);
 
     public TicTacToeViewGUI() {
         JFrame frame = new JFrame();
@@ -58,14 +62,21 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     }
 
     @Override
-    public void switchPlayer() {
+    public void switchToPlayerX() {
+        //assuming we always start with player X at the beginning of the game
+        //this.setTitle("TicTacToe - PLAYER X's TURN");
+        // assuming turn count starts at 0 and increments after a player has played their turn
+        // if turn count is even
+        this.setTitle("TicTacToe - PLAYER X's TURN");
+    }
+
+    @Override
+    public void switchToPlayerO() {
         //assuming we always start with player X at the beginning of the game
         //this.setTitle("TicTacToe - PLAYER X's TURN");
         // assuming turn count starts at 0 and increments after a player has played their turn
         // if turn count is odd
         this.setTitle("TicTacToe - PLAYER O's TURN");
-        // if turn count is even
-        this.setTitle("TicTacToe - PLAYER X's TURN");
     }
 
     @Override
@@ -107,19 +118,32 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
     @Override
     public void userInput() {
-        // TODO Auto-generated method stub
         //the button they clicked???
-        //?????
 
     }
 
     private class myButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JButton buttonClicked = (JButton) e.getSource();
+
+            // TODO: 2/19/2018 - Figure out how to translate the button click location to something the controller can use
+            // https://stackoverflow.com/questions/22580243/get-position-of-the-button-on-gridlayout
+            // http://www.cbseguy.com/row-column-major-address-calculations-cbse/
+            for (int i = 0; i < 9; i++) {
+                if (buttons[i] == buttonClicked) {
+                    int row = i % 3;
+                    int col = i / 3;
+//                    System.out.printf("Row: %s", row);
+//                    System.out.println();
+//                    System.out.printf("Col: %s", col);
+//                    System.out.println();
+                    myController.takeSpot(row, col);
+                }
+            }
             // if it is x's turn (somehow call updateBoardForX())
-            buttonClicked.setText("X");
+//            buttonClicked.setText("X");
             //if it is o's turn (somehow call updateBoardForO())
-            buttonClicked.setText("O");
+//            buttonClicked.setText("O");
         }
     }
 

@@ -132,19 +132,18 @@ public class TicTacToeViewText implements TicTacToeView {
 
 
     @Override
-    public void switchPlayer() {
+    public void switchToPlayerX() {
         //assuming we always start with player X
         // at beginning of game
         System.out.println("Player X's turn!");
+    }
 
+    @Override
+    public void switchToPlayerO() {
         // assuming turn count starts at 0 and increments after a player has played their turn
         // if turn count is odd
         System.out.println("Player O's turn");
-        // if turn count is even
-        System.out.println("player X's turn");
-
     }
-
 
     @Override
     public void updateBoardForX(int x, int y) {

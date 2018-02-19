@@ -6,7 +6,9 @@ public interface TicTacToeView {
 
     void displayOutOfBoundsError();
 
-    void switchPlayer();
+    void switchToPlayerX();
+
+    void switchToPlayerO();
 
     void updateBoardForX(int x, int y);
 

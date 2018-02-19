@@ -40,18 +40,24 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
 //        Set the current user
         currPlayer = game.currPlayer
 //        Ask the player to make their move
-        view.userInput()
+//        view.userInput()
 //        After the user makes their move, check if the user has won the game
-        if (game.checkIfWon(grid, player)) {
+        if (game.checkIfWon(grid, currPlayer)) {
             endGame()
         } else {
             changePlayer()
-            view.switchPlayer()
+            if (isPlayerOne()) view.switchToPlayerX()
+            else view.switchToPlayerO()
         }
     }
 
     private fun changePlayer() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (currPlayer == 1) game.updatePlayer(2)
+        else game.updatePlayer(1)
+    }
+
+    private fun isPlayerOne(): Boolean {
+        return currPlayer == 1
     }
 
     private fun endGame() {

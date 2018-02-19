@@ -1,16 +1,22 @@
 package model
 
-
+//class Grid(gridCoords: Coordinates) {
 class Grid {
-
     private val grid = hashMapOf<Coordinates, Int>()
 
-    constructor(x: Int, y: Int) {
-
+    init {
+//        initGrid(gridCoords)
+        initGrid()
     }
 
-    fun getCellStatus(coords: Coordinates) : Int? {
-        return grid.get(coords)
+    fun isFree(coords: Coordinates): Boolean {
+        println("Row: ${coords.row}\nCol: ${coords.column}")
+        val retVal = grid[coords]?.toInt() == 0
+        return retVal
+    }
+
+    fun getCellStatus(coords: Coordinates): Int? {
+        return grid[coords]
     }
 
     fun setCellStatus(coords: Coordinates, player: Int) {

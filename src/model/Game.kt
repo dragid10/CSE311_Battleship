@@ -14,6 +14,18 @@ class Game {
     var currPlayer = PLAYER_X
     var gameOver = false
 
+    fun updatePlayer(newPlayer: Int) {
+        if (newPlayer == 1 || newPlayer == 2)
+            turnCount = newPlayer
+    }
+
+    fun checkIfWon(grid: Grid, player: Int): Boolean {
+
+        for (i in 1..3) {
+        }
+
+        return false
+    }
 //    fun main(args: Array<String>) {
 //
 //        while (!gameOver) {
