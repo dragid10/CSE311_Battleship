@@ -10,11 +10,13 @@ class Grid {
     }
 
     fun isFree(coords: Coordinates): Boolean {
-        return grid.get(coords) == 0
+        println("Row: ${coords.row}\nCol: ${coords.column}")
+        val retVal = grid[coords]?.toInt() == 0
+        return retVal
     }
 
-    fun getCellStatus(coords: Coordinates) : Int? {
-        return grid.get(coords)
+    fun getCellStatus(coords: Coordinates): Int? {
+        return grid[coords]
     }
 
     fun setCellStatus(coords: Coordinates, player: Int) {
@@ -29,14 +31,5 @@ class Grid {
             }
         }
     }
-
-    fun hasWon(player: Int) : Boolean {
-
-        for(i in 1..3){
-        }
-
-    return false
-    }
-
 }
 
