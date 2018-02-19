@@ -3,10 +3,10 @@ package model
 
 class Grid {
 
-    private val grid = hashMapOf<Coordinates, Int>()
+    private val grid: HashMap<Coordinates, Int>
 
-    constructor(x: Int, y: Int) {
-
+    constructor() {
+        grid = initGrid()
     }
 
     fun getCellStatus(coords: Coordinates) : Int? {
@@ -17,7 +17,7 @@ class Grid {
             grid[coords] = player
     }
 
-    private fun initGrid() {
+    private fun initGrid(): HashMap<Coordinates, Int> {
         for (i in 1..3) {
             for (j in 1..3) {
                 val coords = Coordinates(i, j)
