@@ -8,7 +8,7 @@ class Game {
     private val PLAYER_O = 2
 
     // Used for which player is currently making a move.
-    var currPlayer = -1
+    var currPlayer = 1
 
     // Determines if the game ended in a Draw (0) or if Player X (1) or Player O (2) won.
     private var winner = 0
