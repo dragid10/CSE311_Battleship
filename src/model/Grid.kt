@@ -13,6 +13,10 @@ class Grid {
         return grid.get(coords) == 0
     }
 
+    fun getCellStatus(coords: Coordinates) : Int? {
+        return grid.get(coords)
+    }
+
     fun setCellStatus(coords: Coordinates, player: Int) {
             grid[coords] = player
     }
