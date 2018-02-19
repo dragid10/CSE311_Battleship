@@ -1,7 +1,5 @@
 package model
 
-import java.util.*
-
 class Game {
 
     // These values are used for determining who is making a move and who has won.
@@ -27,6 +25,7 @@ class Game {
     // Initializes the game's grid.
     private var gameGrid: Grid = Grid()
 
+/*    */
     /**
      * This function will loop until either player has won or the game results in a draw.
      * First, the function will determine whose turn it is. Then, it asks the player to input
@@ -34,7 +33,7 @@ class Game {
      * and will check to see if the player has won. If they have, the game ends. If they have not,
      * the turn counter increments by one and the other player may take their turn. If after nine
      * turns, neither player has won, the game ends in a draw.
-     */
+     *//*
     fun main(args: Array<String>) {
 
         // While the game hasn't ended
@@ -81,7 +80,7 @@ class Game {
                 }
             }
         }
-    }
+    }*/
 
     /**
      * Uses the currently player's move to determine if they won during their turn.
