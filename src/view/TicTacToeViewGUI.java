@@ -22,8 +22,9 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     private JButton buttonClicked;
     private final Controller myController = new ControllerImpl(this);
 
+    JFrame frame = new JFrame();
+
     public TicTacToeViewGUI() {
-        JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
@@ -64,22 +65,22 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     }
 
     @Override
-    public int switchToPlayerX() {
-        //assuming we always start with player X at the beginning of the game
-        //this.setTitle("TicTacToe - PLAYER X's TURN");
-        // assuming turn count starts at 0 and increments after a player has played their turn
-        // if turn count is even
-        this.setTitle("TicTacToe - PLAYER X's TURN");
-        return 0;
-    }
-
-    @Override
     public int switchToPlayerO() {
         //assuming we always start with player X at the beginning of the game
         //this.setTitle("TicTacToe - PLAYER X's TURN");
         // assuming turn count starts at 0 and increments after a player has played their turn
+        // if turn count is even
+        frame.setTitle("Tic-Tac-Toe - PLAYER X's TURN");
+        return 0;
+    }
+
+    @Override
+    public int switchToPlayerX() {
+        //assuming we always start with player X at the beginning of the game
+        //this.setTitle("TicTacToe - PLAYER X's TURN");
+        // assuming turn count starts at 0 and increments after a player has played their turn
         // if turn count is odd
-        this.setTitle("TicTacToe - PLAYER O's TURN");
+        frame.setTitle("Tic-Tac-Toe - PLAYER O's TURN");
         return 0;
     }
 

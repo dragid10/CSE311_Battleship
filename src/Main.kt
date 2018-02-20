@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
     //Custom button text
     val options = arrayOf<Any>("GUI View", "Text View")
     val n = JOptionPane.showOptionDialog(frame,
-            "What view would you like to play Battleship in?",
+            "What view would you like to play Tic-Tac-Toe in?",
             "View Selection",
             JOptionPane.YES_NO_CANCEL_OPTION,
             JOptionPane.QUESTION_MESSAGE,
