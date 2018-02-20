@@ -94,11 +94,13 @@ class Game(private val gameGrid: Grid) {
         val row = lastMove.row
         val col = lastMove.col
 
+        var playerWon = false
+
         // Checks row win.
         for (n in 1..3) {
             if (gameGrid.getCellStatus(Coordinates(row, n)) != currPlayer) {
                 break
-            } else {
+            } else if (n == 3) {
                 return true
             }
         }
@@ -107,7 +109,7 @@ class Game(private val gameGrid: Grid) {
         for (n in 1..3) {
             if (gameGrid.getCellStatus(Coordinates(n, col)) != currPlayer) {
                 break
-            } else {
+            } else if (n == 3) {
                 return true
             }
         }
@@ -116,7 +118,7 @@ class Game(private val gameGrid: Grid) {
         for (n in 1..3) {
             if (gameGrid.getCellStatus(Coordinates(n, n)) != currPlayer) {
                 break
-            } else {
+            } else if (n == 3) {
                 return true
             }
         }
@@ -125,7 +127,7 @@ class Game(private val gameGrid: Grid) {
         for (n in 1..3) {
             if (gameGrid.getCellStatus(Coordinates(4 - n, n)) != currPlayer) {
                 break
-            } else {
+            } else if (n == 3) {
                 return true
             }
         }
