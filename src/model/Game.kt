@@ -1,6 +1,6 @@
 package model
 
-class Game {
+class Game(private val gameGrid: Grid) {
 
     // These values are used for determining who is making a move and who has won.
     private val EMPTY_CELL = 0
@@ -20,10 +20,7 @@ class Game {
     private var gameOver = false
 
     // Used for determining which player goes next and if there is a tie.
-    private var turnCount = 1
-
-    // Initializes the game's grid.
-    private var gameGrid: Grid = Grid()
+    var turnCount = 1
 
 /*    */
     /**
@@ -99,7 +96,7 @@ class Game {
 
         // Checks row win.
         for (n in 1..3) {
-            if (gameGrid.getCellStatus(Coordinates(n, col)) != currPlayer) {
+            if (gameGrid.getCellStatus(Coordinates(row, n)) != currPlayer) {
                 break
             } else {
                 return true
@@ -108,7 +105,7 @@ class Game {
 
         // Checks col win.
         for (n in 1..3) {
-            if (gameGrid.getCellStatus(Coordinates(row, n)) != currPlayer) {
+            if (gameGrid.getCellStatus(Coordinates(n, col)) != currPlayer) {
                 break
             } else {
                 return true
@@ -140,5 +137,6 @@ class Game {
     fun updatePlayer(newPlayer: Int) {
         currPlayer = newPlayer
     }
+
 
 }

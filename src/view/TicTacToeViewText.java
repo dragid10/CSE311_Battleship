@@ -15,11 +15,38 @@ public class TicTacToeViewText implements TicTacToeView {
         board = new String[3][3];
         createBoard(board);
         showBoard(board);
-        userInput();
-        getRow();
-        getCol();
+
+    /*    for (int i = 0; i < 9; i++) {
+            userInput();
+            getRow();
+            getCol();
+        }*/
+//        userInput();
+//        getRow();
+//        getCol();
     }
 
+    private static void showBoard(String[][] board) {
+        breakln();
+        for (String[] aBoard : board) {
+            if (DEBUG) {
+                for (int c = 0; c < board[0].length; c++) {
+                    System.out.print(" " + aBoard[c]);
+                }
+                System.out.println("");
+            } else {
+                for (int c = 0; c < board[0].length; c++) {
+                    if (aBoard[c].equals("S")) {
+                        System.out.print(" " + "-");
+                    } else {
+                        System.out.print(" " + aBoard[c]);
+                    }
+                }
+                System.out.println("");
+            }
+        }
+        breakln();
+    }
 
     private static void breakln() {
         System.out.println("_____________________________________");
@@ -40,29 +67,12 @@ public class TicTacToeViewText implements TicTacToeView {
         }
     }
 
-    private static void showBoard(String[][] board) {
-        breakln();
-        for (int r = 0; r < board.length; r++) {
-            if (DEBUG) {
-                for (int c = 0; c < board[0].length; c++) {
-                    System.out.print(" " + board[r][c]);
-                }
-                System.out.println("");
-            } else {
-                for (int c = 0; c < board[0].length; c++) {
-                    if (board[r][c].equals("S")) {
-                        System.out.print(" " + "-");
-                    } else {
-                        System.out.print(" " + board[r][c]);
-                    }
-                }
-                System.out.println("");
-            }
-        }
-        breakln();
+    public void playGame() {
+        userInput();
+        getRow();
+        getCol();
     }
 
-    @Override
     public void userInput() {
         Scanner input = new Scanner(System.in);
         int pos;
@@ -169,15 +179,30 @@ public class TicTacToeViewText implements TicTacToeView {
         board[coords.getRow()][coords.getCol()] = "O";
     }
 
+    @Override
+    public void displayWhoWon(int currPlayer) {
+        switch (currPlayer) {
+            case 1: //if player X wins
+                System.out.println("Player X wins!");
+
+                break;
+
+            case 2:
+                //if player o wins
+                System.out.println("Player O wins!");
+                break;
+
+            default:         //if it is a draw
+                System.out.println("It's a draw!");
+                break;
+        }
+        endGame();
+    }
 
     @Override
-    public void gameOutcomeMessage() {
-        // If player X wins
-        System.out.println("Player X wins!");
-        // If player Y wins
-        System.out.println("Player Y wins!");
-        // If neither player wins
-        System.out.println("It's a draw!");
+    public void endGame() {
+        System.exit(0);
     }
+
 
 }

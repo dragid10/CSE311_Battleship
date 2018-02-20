@@ -4,21 +4,28 @@ import model.Coordinates
 import model.Game
 import model.Grid
 import view.TicTacToeView
+import view.TicTacToeViewText
 
 class ControllerImpl(private val view: TicTacToeView) : Controller {
     // ========================= Member Variables =========================
     //val = immutable
     //var = mutable
     private val grid = Grid()
-    private val game = Game()
+    private val game = Game(grid)
     private var currPlayer = -1
     private lateinit var coordinates: Coordinates
 
 
     // ========================= Overridden Functions =========================
     override fun startGame() {
-//        playGame()
         setCurrentPlayer()
+        if (view is TicTacToeViewText) {
+            doTextGame()
+        }
+    }
+
+    private fun doTextGame() {
+
     }
 
 
@@ -51,11 +58,19 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
     private fun checkIfGameWon() {
         if (game.hasWon(currPlayer, coordinates)) {
             endGame()
+        } else if (game.turnCount == 9) {
+            currPlayer = 0
+            endGame()
         } else {
             changePlayer()
+            updateTurnCount()
             if (isPlayerOne()) view.switchToPlayerX()
             else view.switchToPlayerO()
         }
+    }
+
+    private fun updateTurnCount() {
+        ++game.turnCount
     }
 
     private fun changePlayer() {
@@ -70,5 +85,7 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
     private fun endGame() {
         // Tell view a player has won
         // Close stuff??
+        view.displayWhoWon(currPlayer)
+        view.endGame()
     }
 }

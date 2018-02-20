@@ -18,16 +18,18 @@ fun main(args: Array<String>) {
             options,
             options[0])
 
-    val ticTacToeController: ControllerImpl
+    val ticTacToeController: ControllerImpl?
     ticTacToeController = if (n == 0) {
 //        val gui = TicTacToeViewGUI()
         val gameFrame = JFrame()
         val gui = TicTacToeViewGUI()
         ControllerImpl(gui)
-    } else {
+    } else if (n == 1) {
         println("You chose the text view")
         val text = TicTacToeViewText()
         ControllerImpl(text)
+    } else {
+        null
     }
-    ticTacToeController.startGame()
+    ticTacToeController?.startGame() ?: System.exit(0)
 }

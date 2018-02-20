@@ -16,8 +16,7 @@ public interface TicTacToeView {
 
     void updateBoardForO(Coordinates coords);
 
-    void gameOutcomeMessage();
+    void displayWhoWon(int currPlayer);
 
-    void userInput();
-
+    void endGame();
 }

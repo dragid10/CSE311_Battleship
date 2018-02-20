@@ -79,6 +79,7 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
         int row = coords.getRow();
         int col = coords.getCol();
         buttonClicked.setText("X");
+        buttonClicked.updateUI();
 
 
     }
@@ -88,34 +89,41 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
         int row = coords.getRow();
         int col = coords.getCol();
         buttonClicked.setText("O");
+        buttonClicked.updateUI();
     }
 
     @Override
-    public void gameOutcomeMessage() {
+    public void displayWhoWon(int currPlayer) {
         JFrame frame = new JFrame();
-        //if player X wins
-        JOptionPane.showMessageDialog(frame,
-                "Player X wins!",
-                "A plain message",
-                JOptionPane.PLAIN_MESSAGE);
+        switch (currPlayer) {
+            case 1: //if player X wins
+                JOptionPane.showMessageDialog(frame,
+                        "Player X wins!",
+                        "A plain message",
+                        JOptionPane.PLAIN_MESSAGE);
+                break;
 
-        //if player o wins
-        JOptionPane.showMessageDialog(frame,
-                "Player O wins!",
-                "A plain message",
-                JOptionPane.PLAIN_MESSAGE);
+            case 2:
+                //if player o wins
+                JOptionPane.showMessageDialog(frame,
+                        "Player O wins!",
+                        "A plain message",
+                        JOptionPane.PLAIN_MESSAGE);
+                break;
 
-        //if it is a draw
-        JOptionPane.showMessageDialog(frame,
-                "It is a Draw!",
-                "A plain message",
-                JOptionPane.PLAIN_MESSAGE);
-
+            default:         //if it is a draw
+                JOptionPane.showMessageDialog(frame,
+                        "It is a Draw!",
+                        "A plain message",
+                        JOptionPane.PLAIN_MESSAGE);
+                break;
+        }
+        endGame();
     }
 
     @Override
-    public void userInput() {
-        //the button they clicked???
+    public void endGame() {
+        System.exit(0);
     }
 
     private class MyButtonListener implements ActionListener {
