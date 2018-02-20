@@ -77,21 +77,22 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     }
 
     @Override
-    public void updateBoardForX(Coordinates coords) {
+    public boolean updateBoardForX(Coordinates coords) {
         int row = coords.getRow();
         int col = coords.getCol();
         buttonClicked.setText("X");
         buttonClicked.updateUI();
-
+        return true;
 
     }
 
     @Override
-    public void updateBoardForO(Coordinates coords) {
+    public boolean updateBoardForO(Coordinates coords) {
         int row = coords.getRow();
         int col = coords.getCol();
         buttonClicked.setText("O");
         buttonClicked.updateUI();
+        return true;
     }
 
     @Override
@@ -133,6 +134,7 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
     }
 
+    // On Click Listener
     private class MyButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             buttonClicked = (JButton) e.getSource();

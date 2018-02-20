@@ -6,6 +6,7 @@ import javax.swing.JOptionPane
 
 fun main(args: Array<String>) {
 
+//    Create JFrame stuff
     val frame = JFrame()
     //Custom button text
     val options = arrayOf<Any>("GUI View", "Text View")
@@ -18,9 +19,9 @@ fun main(args: Array<String>) {
             options,
             options[0])
 
+//    Initializes and starts the tictactoe controller
     val ticTacToeController: ControllerImpl?
     ticTacToeController = if (n == 0) {
-//        val gui = TicTacToeViewGUI()
         val gameFrame = JFrame()
         val gui = TicTacToeViewGUI()
         ControllerImpl(gui)

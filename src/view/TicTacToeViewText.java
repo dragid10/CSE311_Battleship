@@ -17,7 +17,11 @@ public class TicTacToeViewText implements TicTacToeView {
         showBoard(board);
     }
 
-
+    /**
+     * Prints out the current board view
+     *
+     * @param board the board to print out
+     */
     private static void showBoard(String[][] board) {
         breakln();
         for (String[] aBoard : board) {
@@ -40,6 +44,9 @@ public class TicTacToeViewText implements TicTacToeView {
         breakln();
     }
 
+    /**
+     * Prints out the moves a user can make
+     */
     private static void breakln() {
         System.out.println("_____________________________________");
         System.out.println("Game Board layout: ");
@@ -51,6 +58,11 @@ public class TicTacToeViewText implements TicTacToeView {
         System.out.println("");
     }
 
+    /**
+     * Creates and initializes the gameboard
+     *
+     * @param board 2D array containing the board
+     */
     private static void createBoard(String[][] board) {
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
@@ -63,29 +75,102 @@ public class TicTacToeViewText implements TicTacToeView {
     public void playGame(int currPlayer) {
         for (int i = 0; i < 9; i++) {
             userInput();
-            Coordinates coords = new Coordinates(getRow(), getCol());
-            updateBoard(currPlayer, coords);
+            Coordinates coords;
+            coords = new Coordinates(getRow(), getCol());
+            while (!updateBoard(currPlayer, coords)) {
+                userInput();
+                coords = new Coordinates(getRow(), getCol());
+//                updateBoard(currPlayer, coords);
+            }
             updateUI();
-            checkIfPlayerWon(currPlayer);
-            if (currPlayer == 1) currPlayer = switchToPlayerO();
-            else currPlayer = switchToPlayerX();
+            if (checkIfPlayerWon(currPlayer, coords)) {
+                displayWhoWon(currPlayer);
+            } else {
+                if (currPlayer == 1) currPlayer = switchToPlayerO();
+                else currPlayer = switchToPlayerX();
+            }
         }
+
+        displayWhoWon(0);
     }
 
-    private void checkIfPlayerWon(int currPlayer) {
+    /**
+     * Uses the currently player's move to determine if they won during their turn.
+     * Checks the row and col the last move was made in and checks the two diagonals.
+     * If all of the cells in a row, col, diagonal, or reverse diagonal are owned
+     * by the player, then the player has won the game.
+     *
+     * @param currPlayer The player who is currently taking their turn.
+     * @param lastMove   The move the current player just made.
+     * @return If the player has won the game.
+     */
+    private boolean checkIfPlayerWon(int currPlayer, Coordinates lastMove) {
+        int row = lastMove.getRow() - 1;
+        int col = lastMove.getCol() - 1;
+        String currPlayerSymbol = currPlayer == 1 ? "X" : "O";
 
+        for (int i = 0; i < 3; i++) {
+            if (!board[row][i].equals(currPlayerSymbol)) {
+                break;
+            } else if (i == 2) {
+                return true;
+            }
+        }
 
+        for (int i = 0; i < 3; i++) {
+            if (!board[i][col].equals(currPlayerSymbol)) {
+                break;
+            } else if (i == 2) {
+                return true;
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            if (!board[i][i].equals(currPlayerSymbol)) {
+                break;
+            } else if (i == 2) {
+                return true;
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            if (!board[2 - i][i].equals(currPlayerSymbol)) {
+                break;
+            } else if (i == 2) {
+                return true;
+            }
+        }
+        return false;
     }
 
+    /**
+     * Iterates through the gameboard array to display it
+     */
     private void updateUI() {
         showBoard(board);
     }
 
-    private void updateBoard(int currPlayer, Coordinates coords) {
-        if (currPlayer == 1) updateBoardForX(coords);
-        else updateBoardForO(coords);
+
+    /**
+     * Updates the gameboard with the move that the last player just made
+     *
+     * @param currPlayer The player who is currently taking their turn.
+     * @param coords     The move the current player just made.
+     */
+    private boolean updateBoard(int currPlayer, Coordinates coords) {
+        boolean updated;
+        if (currPlayer == 1) {
+            updated = updateBoardForX(coords);
+        } else {
+            updated = updateBoardForO(coords);
+        }
+
+        return updated;
     }
 
+    /**
+     * Takes in input from the user in order to make a move
+     */
     public void userInput() {
         Scanner input = new Scanner(System.in);
         int pos;
@@ -141,7 +226,6 @@ public class TicTacToeViewText implements TicTacToeView {
      * @return int row
      */
     private int getRow() {
-        System.out.println("Row: " + row);
         return row;
     }
 
@@ -151,7 +235,6 @@ public class TicTacToeViewText implements TicTacToeView {
      * @return int col
      */
     private int getCol() {
-        System.out.println("Col: " + col);
         return col;
     }
 
@@ -185,15 +268,24 @@ public class TicTacToeViewText implements TicTacToeView {
     }
 
     @Override
-    public void updateBoardForX(Coordinates coords) {
-        board[coords.getRow() - 1][coords.getCol() - 1] = "X";
-
+    public boolean updateBoardForX(Coordinates coords) {
+        if (board[coords.getRow() - 1][coords.getCol() - 1].equals("-")) {
+            board[coords.getRow() - 1][coords.getCol() - 1] = "X";
+            return true;
+        }
+        System.out.println("Spot already taken, choose a new spot!");
+        return false;
     }
 
 
     @Override
-    public void updateBoardForO(Coordinates coords) {
-        board[coords.getRow() - 1][coords.getCol() - 1] = "O";
+    public boolean updateBoardForO(Coordinates coords) {
+        if (board[coords.getRow() - 1][coords.getCol() - 1].equals("-")) {
+            board[coords.getRow() - 1][coords.getCol() - 1] = "O";
+            return true;
+        }
+        System.out.println("Spot already taken, choose a new spot!");
+        return false;
     }
 
     @Override

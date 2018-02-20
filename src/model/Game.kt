@@ -22,63 +22,6 @@ class Game(private val gameGrid: Grid) {
     // Used for determining which player goes next and if there is a tie.
     var turnCount = 1
 
-/*    */
-    /**
-     * This function will loop until either player has won or the game results in a draw.
-     * First, the function will determine whose turn it is. Then, it asks the player to input
-     * their move's coordinates. If the coordinates are valid, the game will update the game's grid
-     * and will check to see if the player has won. If they have, the game ends. If they have not,
-     * the turn counter increments by one and the other player may take their turn. If after nine
-     * turns, neither player has won, the game ends in a draw.
-     *//*
-    fun main(args: Array<String>) {
-
-        // While the game hasn't ended
-        while (!gameOver) {
-
-            // Used for determining whose turn it is.
-            if (turnCount % 2 == 1) {
-                println("Player X's turn.")
-                currPlayer = PLAYER_X
-            } else {
-                println("Player O's turn.")
-                currPlayer = PLAYER_O
-            }
-
-            print("Please input your move: ")
-
-            // Takes user input and transforms it into the Coordinate data type.
-            val input = Scanner(System.`in`)
-            val x = input.nextInt()
-            val y = input.nextInt()
-            val lastMove = Coordinates(x, y)
-
-            // A move is only valid if the cell the coordinates are pointing to is empty.
-            if (gameGrid.getCellStatus(lastMove) == EMPTY_CELL) {
-
-                // Gives cell's ownership to the current player.
-                gameGrid.setCellStatus(lastMove, currPlayer)
-
-                // Holds the Boolean determining if a player won.
-                playerWon = hasWon(currPlayer, lastMove)
-
-                if (playerWon) {
-                    gameOver = true
-                    winner = currPlayer
-                }
-
-                // Game resulted in a draw.
-                else if (!playerWon && turnCount == 9) {
-                    gameOver = true
-                    winner = 0
-                } else {
-                    turnCount++
-
-                }
-            }
-        }
-    }*/
-
     /**
      * Uses the currently player's move to determine if they won during their turn.
      * Checks the row and col the last move was made in and checks the two diagonals.
