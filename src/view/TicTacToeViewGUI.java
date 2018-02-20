@@ -57,21 +57,23 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     }
 
     @Override
-    public void switchToPlayerX() {
+    public int switchToPlayerX() {
         //assuming we always start with player X at the beginning of the game
         //this.setTitle("TicTacToe - PLAYER X's TURN");
         // assuming turn count starts at 0 and increments after a player has played their turn
         // if turn count is even
         this.setTitle("TicTacToe - PLAYER X's TURN");
+        return 0;
     }
 
     @Override
-    public void switchToPlayerO() {
+    public int switchToPlayerO() {
         //assuming we always start with player X at the beginning of the game
         //this.setTitle("TicTacToe - PLAYER X's TURN");
         // assuming turn count starts at 0 and increments after a player has played their turn
         // if turn count is odd
         this.setTitle("TicTacToe - PLAYER O's TURN");
+        return 0;
     }
 
     @Override
@@ -124,6 +126,11 @@ public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
     @Override
     public void endGame() {
         System.exit(0);
+    }
+
+    @Override
+    public void playGame(int currPlayer) {
+
     }
 
     private class MyButtonListener implements ActionListener {

@@ -25,7 +25,7 @@ class ControllerImpl(private val view: TicTacToeView) : Controller {
     }
 
     private fun doTextGame() {
-
+        view.playGame(currPlayer)
     }
 
 

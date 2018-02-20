@@ -4,13 +4,15 @@ import model.Coordinates;
 
 public interface TicTacToeView {
 
+    void playGame(int currPlayer);
+
     void displayNonEmptySpotError();
 
     void displayOutOfBoundsError();
 
-    void switchToPlayerX();
+    int switchToPlayerX();
 
-    void switchToPlayerO();
+    int switchToPlayerO();
 
     void updateBoardForX(Coordinates coords);
 

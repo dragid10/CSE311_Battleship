@@ -90,7 +90,6 @@ class Game(private val gameGrid: Grid) {
      * @return If the player has won the game.
      */
     fun hasWon(currPlayer: Int, lastMove: Coordinates): Boolean {
-
         val row = lastMove.row
         val col = lastMove.col
 

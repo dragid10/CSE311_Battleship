@@ -15,16 +15,8 @@ public class TicTacToeViewText implements TicTacToeView {
         board = new String[3][3];
         createBoard(board);
         showBoard(board);
-
-    /*    for (int i = 0; i < 9; i++) {
-            userInput();
-            getRow();
-            getCol();
-        }*/
-//        userInput();
-//        getRow();
-//        getCol();
     }
+
 
     private static void showBoard(String[][] board) {
         breakln();
@@ -67,10 +59,31 @@ public class TicTacToeViewText implements TicTacToeView {
         }
     }
 
-    public void playGame() {
-        userInput();
-        getRow();
-        getCol();
+    @Override
+    public void playGame(int currPlayer) {
+        for (int i = 0; i < 9; i++) {
+            userInput();
+            Coordinates coords = new Coordinates(getRow(), getCol());
+            updateBoard(currPlayer, coords);
+            updateUI();
+            checkIfPlayerWon(currPlayer);
+            if (currPlayer == 1) currPlayer = switchToPlayerO();
+            else currPlayer = switchToPlayerX();
+        }
+    }
+
+    private void checkIfPlayerWon(int currPlayer) {
+
+
+    }
+
+    private void updateUI() {
+        showBoard(board);
+    }
+
+    private void updateBoard(int currPlayer, Coordinates coords) {
+        if (currPlayer == 1) updateBoardForX(coords);
+        else updateBoardForO(coords);
     }
 
     public void userInput() {
@@ -127,8 +140,9 @@ public class TicTacToeViewText implements TicTacToeView {
      *
      * @return int row
      */
-    private void getRow() {
+    private int getRow() {
         System.out.println("Row: " + row);
+        return row;
     }
 
     /**
@@ -136,8 +150,9 @@ public class TicTacToeViewText implements TicTacToeView {
      *
      * @return int col
      */
-    private void getCol() {
+    private int getCol() {
         System.out.println("Col: " + col);
+        return col;
     }
 
     @Override
@@ -154,29 +169,31 @@ public class TicTacToeViewText implements TicTacToeView {
 
 
     @Override
-    public void switchToPlayerX() {
+    public int switchToPlayerX() {
         //assuming we always start with player X
         // at beginning of game
         System.out.println("Player X's turn!");
+        return 1;
     }
 
     @Override
-    public void switchToPlayerO() {
+    public int switchToPlayerO() {
         // assuming turn count starts at 0 and increments after a player has played their turn
         // if turn count is odd
         System.out.println("Player O's turn");
+        return 2;
     }
 
     @Override
     public void updateBoardForX(Coordinates coords) {
-        board[coords.getRow()][coords.getCol()] = "X";
+        board[coords.getRow() - 1][coords.getCol() - 1] = "X";
 
     }
 
 
     @Override
     public void updateBoardForO(Coordinates coords) {
-        board[coords.getRow()][coords.getCol()] = "O";
+        board[coords.getRow() - 1][coords.getCol() - 1] = "O";
     }
 
     @Override
@@ -184,7 +201,6 @@ public class TicTacToeViewText implements TicTacToeView {
         switch (currPlayer) {
             case 1: //if player X wins
                 System.out.println("Player X wins!");
-
                 break;
 
             case 2:
@@ -203,6 +219,4 @@ public class TicTacToeViewText implements TicTacToeView {
     public void endGame() {
         System.exit(0);
     }
-
-
 }
