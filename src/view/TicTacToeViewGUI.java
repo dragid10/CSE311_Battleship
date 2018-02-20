@@ -9,6 +9,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Game's graphical user interface
+ *
+ * @author Christian Metz
+ * @version 2.0
+ * @date 17.01.2012
+ */
 public class TicTacToeViewGUI extends JFrame implements TicTacToeView {
 
     private static final JButton[] buttons = new JButton[9]; //create 9 buttons
